@@ -3,7 +3,7 @@ const db = require("../db");
 
 router.get("/", async (req, res) => {
 	try {
-		let result = await db.getAllDoctors();
+		let result = await db.getAllNurses();
 		res.json(result);
 	} catch (err) {
 		console.log(err);
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
-		let result = await db.getDoctorById(req.params.id);
+		let result = await db.getNurseById(req.params.id);
 		res.json(result);
 	} catch (err) {
 		console.log(err);
@@ -23,16 +23,15 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
 	try {
-		let newDoctor = {
+		let newNurse = {
 			user_id: parseInt(req.body.user_id),
 			manager_id:
 				parseInt(req.body.manager_id) === 0
 					? null
 					: parseInt(req.body.manager_id),
-			speciality: parseInt(req.body.speciality),
 		};
-		let result = await db.createDoctor(newDoctor);
-		res.json({ msg: "doctor added" });
+		let result = await db.createNurse(newNurse);
+		res.json({ msg: "nurse added" });
 	} catch (err) {
 		console.log(err);
 		res.sendStatus(500);
@@ -41,15 +40,14 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 	try {
-		let newDoctor = {
+		let newNurse = {
 			manager_id:
 				parseInt(req.body.manager_id) === 0
 					? null
 					: parseInt(req.body.manager_id),
-			speciality: parseInt(req.body.speciality),
 		};
-		let result = await db.updateDoctor(req.params.id, newDoctor);
-		res.json({ msg: "doctor updated" });
+		let result = await db.updateNurse(req.params.id, newNurse);
+		res.json({ msg: "nurse updated" });
 	} catch (err) {
 		console.log(err);
 		res.sendStatus(500);
@@ -58,8 +56,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
-		let result = await db.deleteDoctor(req.params.id);
-		res.json({ msg: "doctor deleted" });
+		let result = await db.deleteNurse(req.params.id);
+		res.json({ msg: "nurse deleted" });
 	} catch (err) {
 		console.log(err);
 		res.sendStatus(500);
