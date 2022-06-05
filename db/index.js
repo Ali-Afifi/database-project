@@ -160,9 +160,7 @@ db.deleteDoctor = (id) => {
 	});
 };
 
-
 // nurse table
-
 
 db.getAllNurses = () => {
 	return new Promise((resolve, reject) => {
@@ -232,7 +230,6 @@ db.deleteNurse = (id) => {
 	});
 };
 
-
 // patient table
 
 db.getAllPatients = () => {
@@ -249,13 +246,17 @@ db.getAllPatients = () => {
 
 db.getPatientById = (id) => {
 	return new Promise((resolve, reject) => {
-		pool.execute("SELECT * FROM patient WHERE id=?", [id], (err, result) => {
-			if (err) {
-				return reject(err);
-			}
+		pool.execute(
+			"SELECT * FROM patient WHERE id=?",
+			[id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
 
-			return resolve(result);
-		});
+				return resolve(result);
+			}
+		);
 	});
 };
 
@@ -303,6 +304,270 @@ db.deletePatient = (id) => {
 	});
 };
 
+// available_dates table
 
+db.getAllAvDates = () => {
+	return new Promise((resolve, reject) => {
+		pool.execute("Select * FROM available_dates", (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+
+			return resolve(result);
+		});
+	});
+};
+
+db.getAvDateByID = (id) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"Select * FROM available_dates WHERE id=?",
+			[id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.getAvDateByDoctorID = (doctor_id) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"Select * FROM available_dates WHERE doctor_id=?",
+			[doctor_id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.createAvDate = ({ doctor_id, date, s_time, e_time }) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"insert into available_dates (doctor_id, date, s_time, e_time) values(?, ?, ?, ?)",
+			[doctor_id, date, s_time, e_time],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.updateAvDate = (id, { doctor_id, date, s_time, e_time }) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"update available_dates set doctor_id=?, date=?, s_time=?, e_time=? where id=?;",
+			[doctor_id, date, s_time, e_time, id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.deleteAvDate = (id) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"DELETE FROM available_dates WHERE id=?",
+			[id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+// appointment table
+
+db.getAllAppointments = () => {
+	return new Promise((resolve, reject) => {
+		pool.execute("SELECT * FROM appointment;", (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+
+			return resolve(result);
+		});
+	});
+};
+
+db.getAppointmentByID = (id) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"SELECT * FROM appointment where id=?;",
+			[id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.getAppointmentByDoctorID = (id) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"SELECT * FROM appointment where doctor_id=?;",
+			[id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.getAppointmentByPatientID = (id) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"SELECT * FROM appointment where patient_id=?;",
+			[id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.createAppointment = ({ doctor_id, patient_id, date }) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"insert into appointment (doctor_id, date, patient_id, state) values(?, ?, ?, 1)",
+			[doctor_id, date, patient_id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.updateAppointment = (id, { doctor_id, patient_id, date, state }) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"update appointment set doctor_id=?, date=?, state=?, patient_id=? where id=?;",
+			[doctor_id, date, state, patient_id, id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.deleteAppointment = (id) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"DELETE FROM appointment WHERE id=?",
+			[id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+// permissions table
+
+db.getAllPermissions = () => {
+	return new Promise((resolve, reject) => {
+		pool.execute("SELECT * FROM permissions", (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+
+			return resolve(result);
+		});
+	});
+};
+
+db.getPermissionsByID = (id) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"SELECT * FROM permissions where user_id=?",
+			[id],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.createPermission = (id, route, method) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"INSERT INTO permissions (user_id, allowed_route, method) values (?, ?, ?)",
+			[id, route, method],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
+
+db.deletePermission = (id, route, method) => {
+	return new Promise((resolve, reject) => {
+		pool.execute(
+			"DELETE FROM permissions WHERE (user_id=?) and (allowed_route=?) and (method=?);",
+			[id, route, method],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+
+				return resolve(result);
+			}
+		);
+	});
+};
 
 module.exports = db;
