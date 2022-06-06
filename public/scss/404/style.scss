@@ -1,0 +1,32 @@
+@import "../css/__global"; //header, navbar, footer, and general styling
+
+a{
+    color: white;
+    font: 700  max(1.7vw, 1.7vh) "poppins";
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    img{
+        width: max(25vw,25vh);
+    }
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h2{
+        font-size: max(1.4vw, 1.4vh);
+        margin: 5vh 0;
+    }
+    button{
+        width: max(25vw,25vh);
+        border: none;
+        background-color: var(--secondary-color);
+        border-radius: 5px;
+        padding: 1vw 0;
+    }
+}

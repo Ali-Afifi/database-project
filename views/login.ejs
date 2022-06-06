@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/login/style.css" />
+		<title>Login</title>
+	</head>
+	<body>
+		<div class="main-container">
+			<div class="form">
+				<h1>MY CLINIC</h1>
+				<form>
+					<div class="segment">
+						<input
+							type="username"
+							name="username"
+							id="username"
+							placeholder="email"
+						/>
+						<label for="username"
+							><img src="../img/profile.svg" alt="" srcset=""
+						/></label>
+					</div>
+					<di class="segment">
+						<input
+							type="password"
+							name="password"
+							id="password"
+							placeholder="password"
+						/>
+						<label for="password"
+							><img src="../img/key-solid.svg" alt=""
+						/></label>
+					</di>
+					<button type="button" id="submit">login</button>
+					<a href="/signup"><button type="button" id="sign-up">sign-up</button></a>
+				</form>
+			</div>
+		</div>
+		<%- include('partials/footer') %>
+	</body>
+
+	<script>
+		document.getElementById("submit").addEventListener("click", () => {
+			let data = {
+				email: document.getElementById("username").value,
+				password: document.getElementById("password").value,
+			};
+
+			if (data.email != "" && data.password != "") {
+				fetch("http://localhost:8080/api/login", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(data),
+				})
+					.then((response) => {
+						return response.json();
+					})
+					.then((data) => {
+						localStorage.setItem("jwt_token", data);
+						// window.location.href = "localhost:8080/home";
+					})
+					.catch((error) => {
+						console.error("Error:", error);
+					});
+			} else {
+				window.alert("please enter your email and password");
+			}
+		});
+
+	</script>
+</html>
+
+// .then((data) => { // window.location.replace("/"); // })

@@ -5,7 +5,9 @@ const { hashPassword, cleanUserObj } = require("../utils");
 
 router.post("/login", async (req, res) => {
 	try {
-		let user = cleanUserObj(await db.getUserByEmail(req.body.email))[0];
+		let user = (await db.getUserByEmail(req.body.email))[0];
+
+		// console.log(user);
 
 		if (hashPassword(req.body.password) === user.password) {
 			let token = jwt.sign(
