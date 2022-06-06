@@ -13,6 +13,8 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let result = await db.getNurseById(req.params.id);
 		res.json(result);
 	} catch (err) {
@@ -40,6 +42,8 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let newNurse = {
 			manager_id:
 				parseInt(req.body.manager_id) === 0
@@ -56,6 +60,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let result = await db.deleteNurse(req.params.id);
 		res.json({ msg: "nurse deleted" });
 	} catch (err) {

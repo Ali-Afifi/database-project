@@ -15,6 +15,8 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let result = await db.getUserById(req.params.id);
 		result = utils.cleanUserObj(result);
 		res.json(result);
@@ -45,6 +47,8 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let newUser = {
 			fname: req.body.fname,
 			lname: req.body.lname,
@@ -60,6 +64,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let result = await db.deleteUser(req.params.id);
 		res.json({ msg: "user deleted" });
 	} catch (err) {

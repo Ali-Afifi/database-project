@@ -7,6 +7,7 @@ const cleanUserObj = (arr) => {
 		arr[i].gender = Boolean(Buffer.from(arr[i].gender).readInt8())
 			? "male"
 			: "female";
+		delete arr[i].password;
 	}
 
 	return arr;

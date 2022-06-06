@@ -13,6 +13,9 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let result = await db.getAvDateByID(req.params.id);
 		res.json(result);
 	} catch (err) {
@@ -23,6 +26,9 @@ router.get("/:id", async (req, res) => {
 
 router.get("/doctor/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let result = await db.getAvDateByDoctorID(req.params.id);
 		res.json(result);
 	} catch (err) {
@@ -49,6 +55,9 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let newDate = {
 			doctor_id: parseInt(req.body.doctor_id),
 			date: req.body.date,
@@ -65,6 +74,9 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let result = await db.deleteAvDate(req.params.id);
 		res.json({ msg: "date deleted" });
 	} catch (err) {

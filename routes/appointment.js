@@ -13,6 +13,8 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let result = await db.getAppointmentByID(req.params.id);
 		res.json(result);
 	} catch (err) {
@@ -23,6 +25,8 @@ router.get("/:id", async (req, res) => {
 
 router.get("/doctor/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let result = await db.getAppointmentByDoctorID(req.params.id);
 		res.json(result);
 	} catch (err) {
@@ -33,6 +37,8 @@ router.get("/doctor/:id", async (req, res) => {
 
 router.get("/patient/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let result = await db.getAppointmentByPatientID(req.params.id);
 		res.json(result);
 	} catch (err) {
@@ -58,11 +64,13 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let newAppointment = {
 			doctor_id: parseInt(req.body.doctor_id),
 			patient_id: parseInt(req.body.patient_id),
 			date: req.body.date,
-            state: parseInt(req.body.state)
+			state: parseInt(req.body.state),
 		};
 		let result = await db.updateAppointment(req.params.id, newAppointment);
 		res.json({ msg: "appointment updated" });
@@ -74,6 +82,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
 		let result = await db.deleteAppointment(req.params.id);
 		res.json({ msg: "appointment deleted" });
 	} catch (err) {

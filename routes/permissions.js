@@ -13,6 +13,9 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let result = await db.getPermissionsByID(req.params.id);
 		res.json(result);
 	} catch (err) {
@@ -24,6 +27,9 @@ router.get("/:id", async (req, res) => {
 router.post("/:id", async (req, res) => {
 	try {
 
+		if (req.params.id === "") throw err;
+
+
 		let result = await db.createPermission(req.params.id, req.body.allowed_route, req.body.method);
 		res.json({ msg: "permission added" });
 	} catch (err) {
@@ -34,6 +40,9 @@ router.post("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let result = await db.deletePermission(req.params.id, req.body.allowed_route, req.body.method);
 		res.json({ msg: "permission deleted" });
 	} catch (err) {

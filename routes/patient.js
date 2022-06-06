@@ -13,6 +13,9 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let result = await db.getPatientById(req.params.id);
 		res.json(result);
 	} catch (err) {
@@ -23,6 +26,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
 	try {
+	
+
 		let newPatient = {
 			user_id: parseInt(req.body.user_id),
 			doctor_id:
@@ -44,6 +49,9 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let newPatient = {
 			doctor_id:
 				parseInt(req.body.doctor_id) === 0
@@ -64,6 +72,9 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
+		if (req.params.id === "") throw err;
+
+
 		let result = await db.deletePatient(req.params.id);
 		res.json({ msg: "patient deleted" });
 	} catch (err) {
