@@ -6,6 +6,17 @@ const patientRouter = require("./patient");
 const availableDatesRouter = require("./availableDates");
 const appointmentsRouter = require("./appointment");
 const permissionsRouter = require("./permissions");
+const authRouter = require("./auth");
+
+const isAuthenticated = require("../middleware/authenticate");
+const isAuthorized = require("../middleware/authorize");
+
+
+router.use("/", authRouter);
+
+router.use("/", isAuthenticated);
+router.use(isAuthorized);
+
 
 router.use("/user", userRouter);
 router.use("/doctor", doctorRouter);
