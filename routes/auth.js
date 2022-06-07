@@ -33,4 +33,34 @@ router.post("/login", async (req, res) => {
 	}
 });
 
+router.post("/signup", async (req, res) => {
+	try {
+		let newUser = req.body;
+		newUser.admin = 0;
+		newUser.gender = parseInt(newUser.gender);
+		newUser.date_joined = new Date().toISOString().slice(0, 10);
+		newUser.password = hashPassword(newUser.password);
+
+		// console.log(newUser);
+
+		let created = await db.createUser(newUser);
+		let id = (await db.getUserByEmail(newUser.email))[0]["id"];
+
+		// console.log(id);
+
+		await db.createPatient({
+			user_id: id,
+			doctor_id: null,
+			nurse_id: null,
+		});
+
+		res.status(200).redirect("http://localhost:8080/login");
+	} catch (err) {
+		console.log(err.sqlMessage);
+		res.status(404).send({
+			message: "the email you've entered is already taken",
+		});
+	}
+});
+
 module.exports = router;

@@ -168,7 +168,7 @@ footer {
   padding: 3% 0;
   background-color: var(--primary-color);
   color: white;
-  height: 60vh;
+  height: 75vh;
   width: 40vw;
   border-right: solid white 10px;
 }
@@ -207,6 +207,10 @@ footer {
           align-items: center;
 }
 
+.form form .buttons a {
+  width: 100%;
+}
+
 .form form .buttons button {
   margin-top: 8%;
   width: 100%;
@@ -214,14 +218,31 @@ footer {
   font-weight: bold;
 }
 
+.form form .radio {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .form .segment {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;

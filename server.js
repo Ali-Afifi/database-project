@@ -14,10 +14,14 @@ app.use("/login", (req, res) => {
 	res.render("login");
 });
 
+app.use("/signup", (req, res) => {
+	res.render("signup");
+});
+
 app.use("/api", apiRouter);
 
 app.get("*", (req, res) => {
-	res.status(404).send("page not found");
+	res.status(404).render("404");
 });
 
 const port = process.env.PORT || 8080;

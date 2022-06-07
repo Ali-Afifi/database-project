@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="/login/style.css" />
-		<title>Login</title>
+		<link rel="stylesheet" href="/signup/style.css" />
+		<title>Sign-up</title>
 	</head>
 	<body>
 		<div class="main-container">
@@ -28,7 +28,7 @@
 							placeholder="password"
 						/>
 					</div>
-                    <div class="segment">
+					<div class="segment">
 						<input
 							type="text"
 							name="first name"
@@ -36,7 +36,7 @@
 							placeholder="first name"
 						/>
 					</div>
-                    <div class="segment">
+					<div class="segment">
 						<input
 							type="text"
 							name="last name"
@@ -44,8 +44,30 @@
 							placeholder="last name"
 						/>
 					</div>
-					<button type="button" id="submit">sign-up</button>
-					<a href="/login"><button type="button" id="sign-up">login</button></a>
+					<div class="radio">
+						<p>gender:</p>
+						<input
+							type="radio"
+							id="male"
+							name="gender"
+							value="1"
+							checked
+						/>
+						<label for="male">male</label>
+						<input
+							type="radio"
+							id="female"
+							name="gender"
+							value="0"
+						/>
+						<label for="female">female</label>
+					</div>
+					<div class="buttons">
+						<button type="button" id="submit">sign-up</button>
+						<a href="/login"
+							><button type="button" id="login">login</button></a
+						>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -55,34 +77,46 @@
 	<script>
 		document.getElementById("submit").addEventListener("click", () => {
 			let data = {
-				email: document.getElementById("username").value,
+				email: document.getElementById("email").value,
 				password: document.getElementById("password").value,
+				fname: document.getElementById("fname").value,
+				lname: document.getElementById("lname").value,
+				gender: document.getElementById("male").checked
+					? document.getElementById("male").value
+					: document.getElementById("female").value,
 			};
 
-			if (data.email != "" && data.password != "") {
+			console.log(data);
+
+			if (
+				data.email != "" &&
+				data.password != "" &&
+				data.fname != "" &&
+				data.lname != "" &&
+				data.gender != ""
+			) {
 				fetch("http://localhost:8080/api/signup", {
 					method: "POST",
+					redirect: "follow",
 					headers: {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify(data),
 				})
 					.then((response) => {
-						return response.json();
+						if (response.redirected) {
+							window.location.href = response.url;
+						}
 					})
 					.then((data) => {
-						localStorage.setItem("jwt_token", data);
-						// window.location.href = "localhost:8080/home";
+						console.log(data);
 					})
 					.catch((error) => {
 						console.error("Error:", error);
 					});
 			} else {
-				window.alert("please enter your email and password");
+				window.alert("please fill the whole form before submitting");
 			}
 		});
-
 	</script>
 </html>
-
-// .then((data) => { // window.location.replace("/"); // })

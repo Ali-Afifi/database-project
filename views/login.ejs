@@ -23,7 +23,7 @@
 							><img src="../img/profile.svg" alt="" srcset=""
 						/></label>
 					</div>
-					<di class="segment">
+					<div class="segment">
 						<input
 							type="password"
 							name="password"
@@ -33,9 +33,15 @@
 						<label for="password"
 							><img src="../img/key-solid.svg" alt=""
 						/></label>
-					</di>
-					<button type="button" id="submit">login</button>
-					<a href="/signup"><button type="button" id="sign-up">sign-up</button></a>
+					</div>
+					<div class="buttons">
+						<button type="button" id="submit">login</button>
+						<a href="/signup"
+							><button type="button" id="sign-up">
+								sign-up
+							</button></a
+						>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -52,6 +58,7 @@
 			if (data.email != "" && data.password != "") {
 				fetch("http://localhost:8080/api/login", {
 					method: "POST",
+					redirect: "follow",
 					headers: {
 						"Content-Type": "application/json",
 					},
@@ -71,8 +78,5 @@
 				window.alert("please enter your email and password");
 			}
 		});
-
 	</script>
 </html>
-
-// .then((data) => { // window.location.replace("/"); // })
