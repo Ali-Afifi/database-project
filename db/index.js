@@ -40,15 +40,19 @@ db.getUserById = (id) => {
 
 db.getUserByEmail = (email) => {
 	return new Promise((resolve, reject) => {
-		pool.execute("SELECT * FROM user WHERE email=?", [email], (err, result) => {
-			if (err) {
-				return reject(err);
-			}
+		pool.execute(
+			"SELECT * FROM user WHERE email=?",
+			[email],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
 
-			return resolve(result);
-		});
+				return resolve(result);
+			}
+		);
 	});
-}
+};
 
 db.createUser = ({
 	fname,

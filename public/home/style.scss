@@ -1,0 +1,23 @@
+@import "../scss/__global.scss"; //header, navbar, footer, and general styling
+
+
+.container{
+    padding: 80px;
+}
+
+.nav-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    margin: 0 20px;
+    border-radius: 20px;
+    height: fit-content;
+    &:hover{
+        background: rgba(33, 37, 41, 0.15);    
+    }
+    img{
+        height: 80px;
+    }
+}

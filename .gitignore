@@ -107,5 +107,3 @@ dist
 .vscode/
 
 # local docker files
-
-docker-compose.yml

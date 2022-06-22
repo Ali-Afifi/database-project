@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/home/style.css" />
+		<title>MY CLINIC</title>
+	</head>
+	<body>
+		<%- include('partials/logout-btn') %> <%- include('partials/header') %>
+
+		
+		<section class="middle container">
+			<a href=<%="/create/" + path %> >
+				<div class="nav-card">
+					<h1>create</h1>
+				</div>
+			</a>
+
+			<a href=<%="/read/" + path %> >
+				<div class="nav-card">
+					<h1>read</h1>
+				</div>
+			</a>
+
+			<a href=<%="/update/" + path %> >
+				<div class="nav-card">
+					<h1>update</h1>
+				</div>
+			</a>
+
+			<a href=<%="/delete/" + path %> >
+				<div class="nav-card">
+					<h1>delete</h1>
+				</div>
+			</a>
+		</section>
+		<%- include('partials/footer') %>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/home/style.css" />
+		<title>MY CLINIC</title>
+	</head>
+	<body>
+		<%- include('partials/logout-btn') %> <%- include('partials/header') %>
+		<section class="middle container">
+			<a href="/crud/avilableDates">
+				<div class="nav-card">
+					<h1>available dates</h1>
+				</div>
+			</a>
+
+			<a href="/crud/permissions">
+				<div class="nav-card">
+					<h1>permissions</h1>
+				</div>
+			</a>
+
+			<a href="/crud/appointment">
+				<div class="nav-card">
+					<h1>appointments</h1>
+				</div>
+			</a>
+			<a href="/crud/nurse">
+				<div class="nav-card">
+					<h1>nurses</h1>
+				</div>
+			</a>
+			<a href="/crud/doctor">
+				<div class="nav-card">
+					<h1>doctors</h1>
+				</div>
+			</a>
+			<a href="/crud/patient">
+				<div class="nav-card">
+					<h1>patients</h1>
+				</div>
+			</a>
+			<a href="/crud/user">
+				<div class="nav-card">
+					<h1>users</h1>
+				</div>
+			</a>
+		</section>
+		<%- include('partials/footer') %>
+	</body>
+	<script>
+		let token = localStorage.getItem("jwt_token");
+		if (!token) {
+			window.location.href = "http://localhost:8080/login";
+		}
+	</script>
+</html>

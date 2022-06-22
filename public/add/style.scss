@@ -1,0 +1,60 @@
+@import "../scss/__global.scss"; //header, navbar, footer, and general styling
+
+
+.flex-secondary{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.form{
+    border-radius: 5px;
+    color: white;
+    width: 60%;
+    background-color: var(--primary-color);
+    height: 80%;
+    form{
+        width: 80%;
+        height: 85%;
+
+    }
+    .segment{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        input{
+            font-weight:500;
+            font-size: 1.1rem;
+            padding: 10px;
+            margin: 10px 10px;
+            width: 80%;
+            height: 5vh;
+            border-radius: 5px;
+        }       
+        select{
+            padding: 10px;
+            font-weight:500;
+            font-size: 1.1rem;
+            margin: 10px 10px;
+            width: 80%;
+            height: 5vh;
+            border-radius: 5px;
+            background-color: white;
+        }
+    }
+}
+input[type="submit" i] {
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+    width: 30%;
+    min-width: 50px;
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+}

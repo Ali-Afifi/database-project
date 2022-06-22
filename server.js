@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const apiRouter = require("./routes/api");
+const mainRouter = require("./routes/main-router");
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use("/signup", (req, res) => {
 });
 
 app.use("/api", apiRouter);
+
+app.use("/", mainRouter);
 
 app.get("*", (req, res) => {
 	res.status(404).render("404");

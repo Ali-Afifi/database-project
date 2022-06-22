@@ -38,6 +38,185 @@ router.post("/", async (req, res) => {
 			date_joined: new Date().toISOString().slice(0, 10),
 		};
 		let result = await db.createUser(newUser);
+
+		if (newUser.admin == 1) {
+			await db.createPermission(result.insertId, "/api/user", "GET");
+			await db.createPermission(result.insertId, "/api/user/:id", "GET");
+			await db.createPermission(result.insertId, "/api/user/:id", "PUT");
+			await db.createPermission(
+				result.insertId,
+				"/api/user/:id",
+				"DELETE"
+			);
+			await db.createPermission(result.insertId, "/api/user/", "POST");
+
+			await db.createPermission(result.insertId, "/api/doctor", "GET");
+			await db.createPermission(
+				result.insertId,
+				"/api/doctor/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/doctor/:id",
+				"PUT"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/doctor/:id",
+				"DELETE"
+			);
+			await db.createPermission(result.insertId, "/api/doctor", "POST");
+
+			await db.createPermission(result.insertId, "/api/nurse", "GET");
+			await db.createPermission(result.insertId, "/api/nurse/:id", "GET");
+			await db.createPermission(result.insertId, "/api/nurse/:id", "PUT");
+			await db.createPermission(
+				result.insertId,
+				"/api/nurse/:id",
+				"DELETE"
+			);
+			await db.createPermission(result.insertId, "/api/nurse", "POST");
+
+			await db.createPermission(result.insertId, "/api/patient", "GET");
+			await db.createPermission(
+				result.insertId,
+				"/api/patient/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/patient/:id",
+				"PUT"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/patient/:id",
+				"DELETE"
+			);
+			await db.createPermission(result.insertId, "/api/patient", "POST");
+
+			await db.createPermission(
+				result.insertId,
+				"/api/availableDates",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/availableDates/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/availableDates/:id",
+				"PUT"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/availableDates/:id",
+				"DELETE"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/availableDates/doctor/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/availableDates",
+				"POST"
+			);
+
+			await db.createPermission(
+				result.insertId,
+				"/api/permissions",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/permissions/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/permissions/:id",
+				"PUT"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/permissions/:id",
+				"DELETE"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/permissions",
+				"POST"
+			);
+
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment/doctor/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment/patient/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment/:id",
+				"PUT"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment/:id",
+				"DELETE"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment",
+				"POST"
+			);
+		} else {
+			await db.createPermission(
+				result.insertId,
+				"/api/availableDates",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/availableDates/doctor/:id",
+				"GET"
+			);
+
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment/patient/:id",
+				"GET"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment",
+				"POST"
+			);
+			await db.createPermission(
+				result.insertId,
+				"/api/appointment/:id",
+				"PUT"
+			);
+		}
+
 		res.json({ msg: "user added" });
 	} catch (err) {
 		console.log(err);
